@@ -1,4 +1,3 @@
-# 创建表
 ## 创建表
 ```
 create table [if not exists] t_name(字段名 字段类型,…,字段名 字段类型)[table options …];
@@ -119,3 +118,8 @@ alter table student comment '新学生表';
 alter table student modify column age int comment '年龄';
 ```
 ## 删除表
+```
+drop table 表1, 表2 ... ;
+```
+可以一次删除多张表；需要注意：此删除为不可逆操作；
+
