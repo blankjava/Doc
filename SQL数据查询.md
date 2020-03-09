@@ -399,21 +399,21 @@ select prod_name,prod_price from Products where prod_price = 4.49;
 WHERE 子句在表名（FROM子句）之后给出；
 ### 列操作符
 where子句的列操作符有如下几种：
-操作符 | 说明
-:- | :-
-= | 等于
-<>或!= | 不等于
-< | 小于
-<= | 小于等于
-!< | 不小于/大于等于
-> | 大于
->= | 大于等于
-!> | 不大于/小于等于
-between and | 在指定的两个值之间
-is null | 为NULL值
-in | 在指定的一组值内
-not | 与其他列操作符配合使用，取反
-like | 按指定规则匹配，一般与通配符一起使用
+|操作符 | 说明|
+|:- | :-|
+|= | 等于|
+|<>或!= | 不等于|
+|< | 小于|
+|<= | 小于等于|
+|!< | 不小于/大于等于|
+|> | 大于|
+|>= | 大于等于|
+|!> | 不大于/小于等于|
+|between and | 在指定的两个值之间|
+|is null | 为NULL值|
+|in | 在指定的一组值内|
+|not | 与其他列操作符配合使用，取反|
+|like | 按指定规则匹配，一般与通配符一起使用|
 
 检索产品价格小于10的产品：
 ```
@@ -432,10 +432,10 @@ select prod_name,prod_price from Products where not vend_id = '1001';
 ```
 
 ### 条件操作符
-操作符 | 说明
-:- | :-
-and | 且
-or | 或
+|操作符 | 说明|
+|:- | :-|
+|and | 且|
+|or | 或|
 条件操作符是用来连接where子句的多个判断条件的，例如：
 ```
 select prod_name,prod_price from Products where vend_id = '1001' and prod_price < 10;
@@ -498,5 +498,23 @@ select prod_id,quantity*item_price expanded_price from OrderItems where order_nu
 quantity物品的数量，item_price是物品单价，所以物品的单项总价为quantity*item_price；另外算术计算支持“+”，“-”，“*”，“/”四个操作符；
 
 ## 函数
+与大多数其他计算机语言一样，SQL 也可以用函数来处理数据。函数一般是在数据上执行的，为数据的转换和处理提供了方便。在上一节，MySQL数据库可以使用concat函数来拼接字段；
+
+与几乎所有DBMS 都等同地支持SQL 语句（如SELECT）不同，每一个DBMS 都有特定的函数。事实上，只有少数几个函数被所有主要的DBMS等同地支持。虽然所有类型的函数一般都可以在每个DBMS 中使用，各个函数的名称和语法可能极其不同。为了说明可能存在的问题，下表列出了3 个常用的函数及其在各个DBMS 中的语法：
+|函数 | 语法|
+|:- | :- |
+|提取字符串的组成部分 | Access 使用MID() ； DB2 、Oracle 、PostgreSQL 和SQLite 使用SUBSTR()；MySQL和SQL Server使用SUBSTRING()|
+|数据类型转换 | Access和Oracle使用多个函数，每种类型的转换有一个函数；DB2和PostgreSQL使用CAST()；MariaDB、MySQL和SQL Server使用CONVERT()|
+|取当前日期 | Access使用NOW() ； DB2 和PostgreSQL 使用CURRENT_DATE ；MariaDB和MySQL使用CURDATE()；Oracle使用SYSDATE；SQL Server使用GETDATE()；SQLite使用DATE()|
+
+大多数SQL 实现支持以下类型的函数。  
+- 用于处理文本字符串（如删除或填充值，转换值为大写或小写）的文本函数。
+- 用于在数值数据上进行算术操作（如返回绝对值，进行代数运算）的数值函数。
+- 用于处理日期和时间值并从这些值中提取特定成分（如返回两个日期之差，检查日期有效性）的日期和时间函数。
+- 返回DBMS 正使用的特殊信息（如返回用户登录信息）的系统函数。
+
+我们在上一课看到函数用于SELECT 后面的列名，但函数的作用不仅于此。它还可以作为SELECT 语句的其他成分，如在WHERE 子句中使用，在其他SQL 语句中使用等；
+
+### 文本函数
 
 
