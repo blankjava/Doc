@@ -390,6 +390,48 @@ select prod_id,prod_price,prod_name from Products order by prod_price DESC,prod_
 DESC关键字只作用于直接相关列上，所以上例中是按prod_price降序排列，相同价格按prod_name升序排列；  
 DESC是DESCENDING的缩写，这两个关键字都可以使用。与DESC相对的是ASC（或ASCENDING），在升序排序时可以指定它。
 
+### 动态列排序
+通常情况下，排序是以固定的一个或多个字段先后进行排序，如果排序字段不是固定的，而是按某个条件才能确定时，就要使用到动态列排序；  
+例如，所有的产品，先由供应商的ID降序排列，当供应商ID = 1003时，以产品价格降序列表，当供应商ID为非1003时，以产品名称降序排列；
+```
+SELECT
+	*
+FROM
+	products
+ORDER BY
+	vend_id,
+	CASE
+	WHEN vend_id = '1003' THEN
+		prod_price
+	ELSE
+		prod_name
+	END DESC;
+```
+
+  ### 条件排序
+在`ORDER BY`子句中，将条件判断后的结果作为新的排序列进行排序；条件排序有两种方式，使用`IF`或`IN`;
+```
+SELECT
+	*
+FROM
+	products
+ORDER BY
+	IF (vend_id = '1003', 0, 1);
+```
+上面的`IF`表达式是指当供应商ID = 1003时，返回0，否则返回1，然后按返回的结果进行升序排列，这样可以实现置顶或置尾效果；
+
+如果有多个判断条件，可以使用`IN`表达式；
+```
+SELECT
+	*
+FROM
+	products
+ORDER BY
+	vend_id IN ('1001','1003') DESC;
+```
+`IN`表达式中，符合条件的返回1，不符合条件的返回0；
+
+
 ## 过滤数据
 这一节将讲解如何使用SELECT 语句的WHERE 子句指定检索条件。
 ### where字句
