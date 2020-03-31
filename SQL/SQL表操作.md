@@ -84,6 +84,12 @@ alter table 表名 add [column] 字段名 数据类型 [列属性] [位置];
 ```
 alter table t_teacher add work varchar(64) after name;
 ```
+
+同时增加多个字段：
+```
+...
+```
+
 ### 4、修改字段类型或位置，基本语法
 ```
 alter table 表名 modify 字段名 数据类型 [列属性] [位置];

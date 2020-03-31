@@ -347,8 +347,8 @@ LIMIT 5指示MySQL等DBMS返回不超过5行的数据。如果要得到后面的
 ```
 select prod_name from Products limit 5 offset 4;
 ```
-LIMIT 5 OFFSET 5指示MySQL等DBMS返回从第5行起的5行数据。  
-注意，第一个被检索的行是第0行，而不是第1行。因此，LIMIT 5 OFFSET 1会检索第2 行，而不是第1行。  
+LIMIT 5 OFFSET 4指示MySQL等DBMS返回从第5行起的5行数据。  
+注意，第一个被检索的行是第0行，而不是第1行。因此，LIMIT 5 OFFSET 1会检索第2行，而不是第1行。  
 MySQL和MariaDB支持简化版的LIMIT 4 OFFSET 3语句，即LIMIT 3,4。使用这个语法，逗号之前的值对应OFFSET，逗号之后的值对应LIMIT。
 ```
 select prod_name from Products limit 5,4;
