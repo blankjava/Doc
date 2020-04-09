@@ -3,7 +3,7 @@ Set 集合，它类似于一个罐子， 程序可以依次把多个对象“丢
 Set 集合不允许包含相同的元素，如果试图把两个相同的元素加入同一个Set 集合中，则添加操作失败，add()方法返回false, 且新元素不会被加入。
 
 ## HashSet类
-HashSet是Set接口的典型实现，大多数时候使用Set集合时就是使用这个实现类。HashSet按Hash算法来存储集合中的元素，因此具有很好的存取和查找性能。  
+HashSet是Set接口的典型实现，大多数时候使用Set集合时就是使用这个实现类。HashSet按Hash算法（哈希表）来存储集合中的元素，因此具有很好的存取和查找性能。  
 HashSet有如下特点：
 - 不能保证元素的排列顺序， 顺序可能与添加顺序不同， 顺序也有可能发生变化
 - HashSet不是同步的， 如果多个线程同时访问一个HashSet, 假设有两个或者两个以上线程同时修改了HashSet集合时， 则必须通过代码来保证其同步
@@ -158,5 +158,42 @@ HashSet集合中的第1个元素和第2个元素完全相同，这表明两个�
 
 
 ## LinkedHashSet类
+HashSet还有一个子类LinkedHashSetL, inkedHashSet集合也是根据元素的hashCode值来决定元素的存储位置，但它同时使用链表维护元素的次序，这样使得元素看起来是以插入的顺序保存的。也就是说， 当遍历LinkedHashSet集合里的元素时，LinkedHashSet将会按元素的添加顺序来访问集合里的元素。  
+LinkedHashSet需要维护元素的插入顺序，因此性能略低于HashSet的性能，但在迭代访问Set里的全部元素时将有很好的性能，因为它以链表来维护内部顺序。
+```
+public void testLinkedHashSet() {
+    LinkedHashSet<String> linkedHashSet = new LinkedHashSet<>();
+    linkedHashSet.add("aa");
+    linkedHashSet.add("bb");
+    linkedHashSet.add("cc");
+    System.out.println(linkedHashSet);
+    //删除元素
+    linkedHashSet.remove("bb");
+    System.out.println(linkedHashSet);
+    //重新添加元素
+    linkedHashSet.add("bb");
+    System.out.println(linkedHashSet);
+}
+```
+运行上面的程序输出如下：
+```
+[aa, bb, cc]
+[aa, cc]
+[aa, cc, bb]
+```
+输出LinkedHashSet集合的元素时，元素的顺序总是与添加顺序一致。  
+虽然LinkedHashSet使用了链表记录集合元素的添加顺序，但LinkedHashSet依然是HashSet, 因此它依然不允许集合元素重复；
+
+## TreeSet类
+TreeSet是SortedSet接口的实现类，正如SortedSet名字所暗示的，TreeSet可以确保集合元素处于排序状态。与HashSet集合相比，TreeSet还提供了如下几个额外的方法。
+```
+```
+表面上看这些方法很多，其实它很简单，因为TreeSet中的元素是有序的（不是像LinkedHashSet那样按添加的顺序排列），所以增加了访问前一个，后一个，第一个，最后一个的方法，并提供了三个从TreeSet中截取子TreeSet的方法；
+
+下面是测试TreeSet基本用法的程序：
+```
+```
+
+
 
 
