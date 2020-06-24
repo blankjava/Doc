@@ -110,3 +110,7 @@
 [泛型]()
 
 [正则表达式](正则表达式.md)
+
+[Lambda表达式](Lambda表达式.md)
+- [Lambda表达式](Lambda表达式.md)
+- [方法引用](Lambda表达式.md)
