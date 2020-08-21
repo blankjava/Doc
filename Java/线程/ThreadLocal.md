@@ -20,7 +20,13 @@ public void set(T value) {
         createMap(t, value);
 }
 ```
-在set方法中，首先获取当前线程对象，然后获取与当前线程对象绑定的ThreadLocalMap对象，如果该对象为空，就创建一个并设置到Thread对象中去，如果不为空，则把数据设置到ThreadLocalMap对象中去，由此可见，真正保存数据的是ThreadLocalMap对象，且与线程对象绑定的也是ThreadLocalMap对象，并不是表面上的ThreadLocal对象；
+在set方法中，首先获取当前线程对象，然后获取与当前线程对象绑定的ThreadLocalMap对象（内部是一个数组），如果该对象为空，就创建一个并设置到当前Thread对象中去，代码如下：
+```
+void createMap(Thread t, T firstValue) {
+    t.threadLocals = new ThreadLocalMap(this, firstValue);
+}
+```
+如果不为空，则以当前ThreadLocal对象为key，把数据保存到ThreadLocalMap对象中去，保存方法是将ThreadLocal对象转换成int类型的数组下标，然后把数据放到数组中；
 
 ThreadLocalMap是ThreadLocal中的内部类，其中有一个属性为Entry数组，这个数组就是保存线程数据的容器：
 ```
@@ -46,6 +52,8 @@ static class Entry extends WeakReference<ThreadLocal<?>> {
     }
 }
 ```
+
+由此可见，真正保存数据的是ThreadLocalMap对象，且与线程对象绑定的也是ThreadLocalMap对象，并不是表面上的ThreadLocal对象，从行为上来看，ThreadLocal是ThreadLocalMap对象的一个代理；
 
 3、从ThreadLocal中取出数据
 ```
